@@ -12,14 +12,26 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { setLogin } from 'src/services/login';
+
 const Login = (props: any) => {
+
+  const [loginForm, setLoginForm] = React.useState({
+    email: '',
+    password: '',
+  })
+  
+  //todo: Mejorar el tipado
+  const handleChange = (event: any) => {
+    console.log(event.target.name)
+    setLoginForm({ ...loginForm, [event.target.name]: event.target.value });
+    
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    
+    setLogin(loginForm)
   };
   const theme = createTheme();
   return (
@@ -50,6 +62,7 @@ const Login = (props: any) => {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(event: any) => handleChange(event)}
             />
             <TextField
               margin="normal"
@@ -60,6 +73,7 @@ const Login = (props: any) => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(event: any) => handleChange(event)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
