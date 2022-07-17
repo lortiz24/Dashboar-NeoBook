@@ -14,9 +14,6 @@ const Loader = (Component) => (props) =>
     </Suspense>
   );
 
-// Pages
-
-const Overview = Loader(lazy(() => import('src/content/overview')));
 
 // Dashboards
 
@@ -26,6 +23,9 @@ const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
 const Messenger = Loader(
   lazy(() => import('src/content/applications/Messenger'))
+);
+const Login = Loader(
+  lazy(() => import('src/content/Login/Login'))
 );
 const Transactions = Loader(
   lazy(() => import('src/content/applications/Transactions'))
@@ -81,14 +81,14 @@ const routes: RouteObject[] = [
     path: '',
     element: <BaseLayout />,
     children: [
-      {
+     {
         path: '/',
-        element: <Overview />
+        element: <Login />
       },
       {
         path: 'overview',
         element: <Navigate to="/" replace />
-      },
+      }, 
       {
         path: 'status',
         children: [
