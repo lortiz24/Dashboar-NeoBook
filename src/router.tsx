@@ -25,7 +25,7 @@ const Messenger = Loader(
   lazy(() => import('src/content/applications/Messenger'))
 );
 const Login = Loader(
-  lazy(() => import('src/content/Login/Login'))
+  lazy(() => import('src/auth/Login/Login'))
 );
 const Transactions = Loader(
   lazy(() => import('src/content/applications/Transactions'))
