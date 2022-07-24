@@ -82,6 +82,7 @@ export const SidebarProvider: FC = ({ children }) => {
   }
 
   const logout = () => {
+    console.log('aqui toy')
     localStorage.removeItem('login')
     const action = {
       type: types.logout,
