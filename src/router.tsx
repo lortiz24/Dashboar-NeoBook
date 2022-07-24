@@ -8,6 +8,7 @@ import { Suspense, useContext } from 'react';
 import SuspenseLoader from './components/SuspenseLoader';
 import { useRouteImportations } from './hooks';
 import { SidebarContext } from './contexts/SidebarContext';
+import Overview from './content/overview';
 
 const Loader = (Component) => (props) =>
 (
@@ -21,18 +22,11 @@ const { Accordions, Avatars, Badges, Buttons, Cards, Crypto, Forms, LoginPage, M
 
 
 const routes: RouteObject[] = [
-   {
+
+  {
     path: '/',
     element: <BaseLayout />,
     children: [
-      {
-        path: 'login',
-        element: <LoginPage />
-      },
-       {
-        path: 'overview',
-        element: <Navigate to="/" replace />
-      },
       {
         path: 'status',
         children: [
@@ -57,13 +51,14 @@ const routes: RouteObject[] = [
             element: <StatusComingSoon />
           }
         ]
-      }, 
+      },
       {
         path: '*',
         element: <Status404 />
       }
     ]
-  }, 
+  },
+
   {
     path: 'dashboards',
     element: <SidebarLayout />,

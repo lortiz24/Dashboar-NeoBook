@@ -60,7 +60,7 @@ const initialValue = {
 }
 export const SidebarProvider: FC = ({ children }) => {
   const [logged, dispatch] = useReducer(reducer, initialValue, init)
-  
+ 
 
   const [sidebarToggle, setSidebarToggle] = useState(false);
 
@@ -82,7 +82,7 @@ export const SidebarProvider: FC = ({ children }) => {
   }
 
   const logout = () => {
-    console.log('aqui toy')
+
     localStorage.removeItem('login')
     const action = {
       type: types.logout,
@@ -91,7 +91,9 @@ export const SidebarProvider: FC = ({ children }) => {
         user: null
       }
     }
+
     dispatch(action);
+   
   }
 
 
