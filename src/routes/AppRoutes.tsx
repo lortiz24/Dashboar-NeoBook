@@ -7,7 +7,7 @@ import { PrivateRoute } from './PrivateRoute'
 import BaseLayout from 'src/layouts/BaseLayout'
 import SidebarLayout from 'src/layouts/SidebarLayout'
 import { Dashboard } from '@mui/icons-material'
-import { SidebarContext } from 'src/contexts/SidebarContext'
+
 export const AppRoutes = () => {
 
  

@@ -23,17 +23,25 @@ export const useLoginLogic = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     setLogin(loginForm)
       .then((result) => {
-        localStorage.setItem('login', JSON.stringify(result));
-        setLoginForm({
-          email: '',
-          password: '',
-        })
-        login({
-          ...result.usuairo, token: result.token
-        })
-        navigate('/dashboards', { replace: true });
+        if (result.token) {
+
+          localStorage.setItem('login', JSON.stringify(result));
+          setLoginForm({
+            email: '',
+            password: '',
+          })
+
+
+          login({
+            ...result.usuairo, token: result.token
+          })
+          navigate('/dashboards', { replace: true });
+        }else{
+          alert('No se pudo iniciar sesion. Intentelo de nuevo');
+        }
       }).catch((err) => {
         console.log(err)
       });
