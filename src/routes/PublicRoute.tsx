@@ -3,10 +3,10 @@ import { Navigate } from 'react-router';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 
 export const PublicRoute = ({children}) => {
-    const {logged} = useContext(SidebarContext)
+    const {logged:{logged}} = useContext(SidebarContext)
 
   return ( !logged )
   ? children
   :
-  <Navigate to='/'/>
+  <Navigate to='/dashboards'/>
 }

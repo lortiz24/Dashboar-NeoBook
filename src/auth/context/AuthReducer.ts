@@ -1,6 +1,8 @@
 import { types } from "../types/types";
 
-export const reducer = (state, action) => {
+
+//todo: mejorar estos tipos
+export const reducer = (state:any, action:any) => {
     switch (action.type) {
         case types.login:
             return {

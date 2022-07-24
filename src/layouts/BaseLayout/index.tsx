@@ -11,12 +11,10 @@ interface BaseLayoutProps {
 }
 
 const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
-  const { logged } = useContext(SidebarContext)
+
   return (
     <>
-      {logged ?
-      <Navigate to='/dashboards' />
-      :
+
       <Box
         sx={{
           flex: 1,
@@ -24,7 +22,7 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
         }}
       >
         {children || <Outlet />}
-      </Box>}
+      </Box>
     </>
   );
 };

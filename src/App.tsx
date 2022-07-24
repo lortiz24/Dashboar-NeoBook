@@ -9,15 +9,16 @@ import ThemeProvider from './theme/ThemeProvider';
 import { useState } from 'react';
 import { AppRoutes } from './routes/AppRoutes';
 
+
 function App() {
   const content = useRoutes(router);
- 
+  
   return (
     <ThemeProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <CssBaseline />
-        {content}
-        {/* <AppRoutes/> */}
+        {/* {content} */}
+        <AppRoutes/>
       </LocalizationProvider>
     </ThemeProvider>
   );

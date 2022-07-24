@@ -13,8 +13,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useLoginLogic } from '../hooks/useLoginLogic';
-import { SidebarContext } from 'src/contexts/SidebarContext';
-import { Navigate } from 'react-router';
 
 
 
@@ -24,7 +22,6 @@ const LoginPages = (props: any) => {
   const { handleChange, handleSubmit, loginForm } = useLoginLogic()
 
   const theme = createTheme();
-  //const { logged } = React.useContext(SidebarContext)
 
   return (
     <>

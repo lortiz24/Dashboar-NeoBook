@@ -1,57 +1,98 @@
-import { FC, useState, createContext, useReducer, useEffect } from 'react';
+import { FC, useState, createContext, useReducer } from 'react';
 import { reducer } from 'src/auth/context/AuthReducer';
+import { types } from 'src/auth/types/types';
+
+
+
+interface ILogged {
+  logged: boolean;
+  user: IUsuario;
+}
+interface IUsuario {
+  nombre: string;
+  cedula: string;
+  correo: string;
+  rol: string;
+  google: boolean,
+  estado: boolean,
+  uid: string;
+  token: string;
+}
 
 type SidebarContext = {
   sidebarToggle: any;
   toggleSidebar: () => void;
   closeSidebar: () => void;
-  logged: boolean;
-  login: () => void;
+  logged: ILogged;
+  login: (user: IUsuario) => void;
   logout: () => void;
-  
+
 };
 
 
+
+const init = () => {
+  const user = JSON.parse(localStorage.getItem('login'));
+
+  return {
+    logged: !!user,
+    user: user ? user.usuario : null
+  }
+}
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SidebarContext = createContext<SidebarContext>(
   {} as SidebarContext
 );
 
+const initialValue = {
+  logged: false,
+  user: {
+    nombre: '',
+    cedula: '',
+    correo: '',
+    rol: '',
+    google: '',
+    estado: '',
+    uid: '',
+    token: '',
+  }
+}
 export const SidebarProvider: FC = ({ children }) => {
+  const [logged, dispatch] = useReducer(reducer, initialValue, init)
+  
 
-
-  const [logged, setlogged] = useState(false)
   const [sidebarToggle, setSidebarToggle] = useState(false);
- 
-
 
   const toggleSidebar = () => {
     setSidebarToggle(!sidebarToggle);
-    console.log(sidebarToggle)
   };
 
-  const isLoggedIn = () => {
-    console.log('gregffrtg')
-    const user = JSON.parse(localStorage.getItem('login'))
-    setlogged(!!user)
-  }
   const closeSidebar = () => {
     setSidebarToggle(false);
   };
 
-  const login = () => {
-    setlogged(true)
+  const login = (user: IUsuario) => {
+    const action = {
+      type: types.login,
+      payload: user
+    }
+    dispatch(action)
+    localStorage.setItem('login', JSON.stringify(user))
   }
+
   const logout = () => {
-    setlogged(false)
+    localStorage.removeItem('login')
+    const action = {
+      type: types.logout,
+      payload: {
+        logged: false,
+        user: null
+      }
+    }
+    dispatch(action);
   }
 
-  
-
-  useEffect(() => {
-    isLoggedIn()
-  }, [])
 
   return (
     <SidebarContext.Provider
