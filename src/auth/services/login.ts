@@ -1,6 +1,18 @@
 import React from 'react'
-import dotenv from 'dotenv'
-dotenv.config()
-/* export const setLogin = ({email, password,}:any) => {
-    console.log(process.env.HTTPS_SERVICE)
-} */
+
+export const setLogin = async ({ email: correo, password, }: any) => {
+
+
+    let params: RequestInit = {
+        headers: {
+            'content-type': 'application/json;charset=UTF-8',
+        },
+        method: "POST",
+        body: JSON.stringify({ correo, password })
+    }
+
+    const respuesta = await fetch('https://backendneosoft.herokuapp.com/api/auth/login', params)
+    const data = await respuesta.json()
+
+    return data
+} 

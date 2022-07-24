@@ -7,6 +7,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';
 import { useState } from 'react';
+import { AppRoutes } from './routes/AppRoutes';
 
 function App() {
   const content = useRoutes(router);
@@ -16,6 +17,7 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <CssBaseline />
         {content}
+        {/* <AppRoutes/> */}
       </LocalizationProvider>
     </ThemeProvider>
   );

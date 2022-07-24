@@ -1,19 +1,26 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { Box, alpha, lighten, useTheme } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { SidebarContext } from 'src/contexts/SidebarContext';
 
 interface SidebarLayoutProps {
   children?: ReactNode;
 }
 
 const SidebarLayout: FC<SidebarLayoutProps> = () => {
-  const theme = useTheme();
 
+  const theme = useTheme();
+  
+  const {logged} = useContext(SidebarContext)
   return (
     <>
+      logged 
+      ?
+      <Navigate to='login'/>
+      :
       <Box
         sx={{
           flex: 1,
