@@ -6,12 +6,11 @@ import LoginPages from '../auth/pages/LoginPages'
 import { PrivateRoute } from './PrivateRoute'
 import BaseLayout from 'src/layouts/BaseLayout'
 import SidebarLayout from 'src/layouts/SidebarLayout'
-import { Dashboard } from '@mui/icons-material'
 import router from 'src/router';
 import Overview from 'src/content/overview'
 
 
-;
+  ;
 export const AppRoutes = () => {
   const content = useRoutes(router);
 
@@ -29,11 +28,11 @@ export const AppRoutes = () => {
 
         <Route
           path="/"
-          element={<PublicRoute>
+          element={
             <BaseLayout>
               <Overview />
             </BaseLayout>
-          </PublicRoute>} />
+          } />
 
         <Route
           path="/*"
