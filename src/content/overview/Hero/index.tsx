@@ -3,6 +3,8 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
+import { useContext } from 'react';
+import { SidebarContext } from 'src/contexts/SidebarContext';
 
 const TypographyH1 = styled(Typography)(
   ({ theme }) => `
@@ -71,6 +73,7 @@ const TsAvatar = styled(Box)(
 );
 
 function Hero() {
+  const { logged } = useContext(SidebarContext)
   return (
     <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
       <Grid
@@ -82,7 +85,7 @@ function Hero() {
         <Grid item md={10} lg={8} mx="auto">
           <LabelWrapper color="success">Version 2.0.0</LabelWrapper>
           <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            NeoBook 
+            NeoBook
           </TypographyH1>
           <TypographyH2
             sx={{ lineHeight: 1.5, pb: 4 }}
@@ -90,7 +93,7 @@ function Hero() {
             color="text.secondary"
             fontWeight="normal"
           >
-            Librate de gestionar tu biblioteca de la forma tradicional. Con NeoBook agiliza los prestamos, devoluciones y dale una mejor experiencia 
+            Librate de gestionar tu biblioteca de la forma tradicional. Con NeoBook agiliza los prestamos, devoluciones y dale una mejor experiencia
             de usuario a tus lectores
           </TypographyH2>
           <Button
@@ -99,19 +102,30 @@ function Hero() {
             size="large"
             variant="contained"
           >
-            Browse Live Preview
+            {logged.logged ?
+              'Ir a la pagina principal'
+              :
+              'Iniciar sesion'
+            }
+
           </Button>
-          <Button
-            sx={{ ml: 2 }}
-            component="a"
-            target="_blank"
-            rel="noopener"
-            href="https://bloomui.com/product/tokyo-free-white-react-typescript-material-ui-admin-dashboard"
-            size="large"
-            variant="text"
-          >
-            Key Features
-          </Button>
+
+          {logged.logged ?
+            <></>
+            :
+            <Button
+              sx={{ ml: 2 }}
+              component="a"
+              target="_blank"
+              rel="noopener"
+              href="https://bloomui.com/product/tokyo-free-white-react-typescript-material-ui-admin-dashboard"
+              size="large"
+              variant="text"
+            >
+              Registrarse
+            </Button>
+          }
+
           <Grid container spacing={3} mt={5}>
             <Grid item md={6}>
               <MuiAvatar>

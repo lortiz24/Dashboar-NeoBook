@@ -23,6 +23,7 @@ import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { SidebarContext } from 'src/contexts/SidebarContext';
+import { roles } from 'src/types/typesGlobals';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -61,7 +62,8 @@ const UserBoxDescription = styled(Typography)(
 
 function HeaderUserbox() {
 
-  const {logout} = useContext(SidebarContext)
+  const { logout, logged } = useContext(SidebarContext)
+
   const navigate = useNavigate()
   const user = {
     name: 'Catherine Pike',
@@ -87,12 +89,12 @@ function HeaderUserbox() {
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+        <Avatar variant="rounded" alt={logged.user.nombre} src={user.avatar} />
         <Hidden mdDown>
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{logged.user.nombre}</UserBoxLabel>
             <UserBoxDescription variant="body2">
-              {user.jobtitle}
+              {logged.user.rol === roles.admin ? "Administrador" : "Lector"}
             </UserBoxDescription>
           </UserBoxText>
         </Hidden>
@@ -114,11 +116,11 @@ function HeaderUserbox() {
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-          <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+          <Avatar variant="rounded" alt={logged.user.nombre} src={user.avatar} />
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{logged.user.nombre}</UserBoxLabel>
             <UserBoxDescription variant="body2">
-              {user.jobtitle}
+              {logged.user.rol === roles.admin ? "Administrador" : "Lector"}
             </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
@@ -143,9 +145,9 @@ function HeaderUserbox() {
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
-          <Button 
-          color="primary" fullWidth
-          onClick={()=>handleLogout()}
+          <Button
+            color="primary" fullWidth
+            onClick={() => handleLogout()}
           >
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
