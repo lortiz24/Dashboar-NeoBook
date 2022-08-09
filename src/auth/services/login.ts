@@ -10,7 +10,7 @@ export const setLogin = async ({ email: correo, password, }: any) => {
         method: "POST",
         body: JSON.stringify({ correo, password })
     }
-
+    console.log(process.env.REACT_APP_HTTPS_SERVICE)
     const respuesta = await fetch(`${process.env.REACT_APP_HTTPS_SERVICE}/api/auth/login`, params)
     const data = await respuesta.json()
 
