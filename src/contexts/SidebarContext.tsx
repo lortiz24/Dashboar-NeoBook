@@ -1,23 +1,11 @@
 import { FC, useState, createContext, useReducer } from 'react';
 import { reducer } from 'src/auth/context/AuthReducer';
 import { types } from 'src/auth/types/types';
+import { ILogged, IUsuario } from './interface/sidebarContexInterface';
 
 
 
-interface ILogged {
-  logged: boolean;
-  user: IUsuario;
-}
-interface IUsuario {
-  nombre: string;
-  cedula: string;
-  correo: string;
-  rol: string;
-  google: boolean,
-  estado: boolean,
-  uid: string;
-  token: string;
-}
+
 
 type SidebarContext = {
   sidebarToggle: any;
@@ -33,10 +21,10 @@ type SidebarContext = {
 
 const init = () => {
   const user = JSON.parse(localStorage.getItem('login'));
-
+  console.log('&&&&&&&&&&&&&&&&',user)
   return {
     logged: !!user,
-    user: user ? user.usuario : null
+    user: user ? user : null
   }
 }
 
@@ -60,7 +48,7 @@ const initialValue = {
 }
 export const SidebarProvider: FC = ({ children }) => {
   const [logged, dispatch] = useReducer(reducer, initialValue, init)
- 
+ console.log('################',logged)
 
   const [sidebarToggle, setSidebarToggle] = useState(false);
 
