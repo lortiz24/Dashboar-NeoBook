@@ -21,7 +21,7 @@ type SidebarContext = {
 
 const init = () => {
   const user = JSON.parse(localStorage.getItem('login'));
-  console.log('&&&&&&&&&&&&&&&&',user)
+
   return {
     logged: !!user,
     user: user ? user : null
@@ -48,7 +48,6 @@ const initialValue = {
 }
 export const SidebarProvider: FC = ({ children }) => {
   const [logged, dispatch] = useReducer(reducer, initialValue, init)
- console.log('################',logged)
 
   const [sidebarToggle, setSidebarToggle] = useState(false);
 
